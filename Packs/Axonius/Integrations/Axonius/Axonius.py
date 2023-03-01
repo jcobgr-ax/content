@@ -147,7 +147,8 @@ def get_by_sq(
     """Get assets with their defined fields returned by a saved query."""
     name: str = args["saved_query_name"]
     max_rows: int = get_int_arg(key="max_results", required=False, default=MAX_ROWS)
-    assets = api_obj.get_by_saved_query(name=name, max_rows=max_rows)
+    fields: List[str] = get_csv_arg(key="fields", required=False)
+    assets = api_obj.get_by_saved_query(name=name, max_rows=max_rows, fields=fields)
     return parse_assets(assets=assets, api_obj=api_obj)
 
 
